@@ -1,8 +1,30 @@
 library(tidyverse)
 
 tail <- read_csv('data/tail_length.csv')
-head(tail)
+syrveys <- read_csv('data/portal_data_joined.csv')
+
 dim(tail) #I have more coloumns??
+dim(surveys)
+head(tail)
+
+
+surveys_inner <- inner_join(x = surveys, y = tail)
+dim(surveys_inner)
+head(surveys_inner)
+
+surveys_left <- left_join(x = surveys, y = tail)
+dim(surveys_inner)
+table(is.na(surveys_left$tail_length))
+
+
+ all(surveys$record_id %>%in%>% tail$record_id)
+all(tail$record_id %>%in%>% surveys$record_id)
+
+
+
+
+
+
 
 
 #join_function (data frame a, data frame b, how to join)
@@ -27,7 +49,7 @@ dim(surveys_right_joined)
 #full_joined(x,y)
 # full_joined keeps everything
 
-surveys_full_joined <- full_join(x=surveys, y = tail)
+surveys_full_joined <- full_join(x = surveys, y = tail)
 dim(surveys_full_joined)
 
 
